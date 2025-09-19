@@ -39,31 +39,38 @@
 </head>
 <body>
 
+    <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark px-4">
         <div>
             <a href="{% url 'login' %}" class="btn btn-secondary me-2">Login</a>
             <a href="{% url 'signup' %}" class="btn btn-primary">Signup</a>
         </div>
     </nav>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-info text-center">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info text-center">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
     <div class="form-container" style="width: 100%;">
         <h2 class="px-4 text-center form-header text-white font-bold py-2 px-4 rounded font-bold mb-4 uppercase text-black bg-gradient-to-r to-blue-500 from-blue-300  animate-gradient">Create a account on EHLDP</h2>
+
+
 
         <form method="post" action="{% url 'signup' %}">
             {% csrf_token %}
             {% for field in form %}
                 <div class="mb-3" id="form">
+                    <!--The fiels is whatsapp number-->
                     {% if field.name == 'whatsapp_number' or field.name == 'country' %}
                     {% if field.name == 'country' %}
                     <label for="{{ field.id_for_label }}" class="form-label" >Select Your Contry and Enter Your Whatsapp number :</label>
                     {{field}}
                     {% else %}
+
+                    <!--End of whatsapp number field-->
+                    
                         <input type="text" name="{{field.name}}" id="id_{{field.name}}" style="width:92%;" placeholder="Enter your whatsapp number " required>
                     {% endif %}
                     {% else %}
@@ -71,6 +78,7 @@
                     <label for="{{ field.id_for_label }}" class="form-label" >{{ field.label }} :</label>
                     <div>
                     <input type="password" name="{{field.name}}" id="id_{{field.name}}" style="width:92%;" required>
+
                     <code class="toggle-password" onclick="togglePassword('id_{{field.name}}')"> 👁️</code></div>
                     {% else %}
                     <label for="{{ field.id_for_label }}" class="form-label" >{{ field.label }} :</label>
@@ -83,7 +91,7 @@
                 </div>
             {% endfor %}
             <center>
-                <button type="submit" class="w-1 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded font-bold mb-4 uppercase text-black bg-gradient-to-r to-blue-500 from-blue-300  animate-gradient">Signup</button>
+            <button type="submit" class="w-1 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded font-bold mb-4 uppercase text-black bg-gradient-to-r to-blue-500 from-blue-300  animate-gradient">Signup</button>
             </center>
         </form>
 
@@ -91,78 +99,16 @@
             You have an account? <a href="{% url 'login' %}">Log In Now </a>
         </p>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); // prevents the form from submitting and reloading the page
-
-                // Get all input values
-                const formData = {};
-                const inputs = form.querySelectorAll('input, select');
-                inputs.forEach(input => {
-                    if (input.name === 'password1') {
-                         // Hide password for security
-                    } else {
-                        formData[input.name] = input.value;
-                   
-                });
-
-                // Remove all content from the body
-                document.body.innerHTML = '';
-
-                // Create a new container for the results
-                const resultContainer = document.createElement('div');
-                resultContainer.className = 'container mt-5';
-                resultContainer.style.maxWidth = '600px';
-
-                // Create a title
-                const title = document.createElement('h2');
-                title.className = 'text-center text-primary mb-4';
-                title.innerText = 'Thank you for your submission!';
-
-                // Create an unordered list to display the submitted data
-                const dataList = document.createElement('ul');
-                dataList.className = 'list-group';
-                
-                for (const key in formData) {
-                    if (formData.hasOwnProperty(key)) {
-                        const listItem = document.createElement('li');
-                        listItem.className = 'list-group-item';
-                        listItem.innerHTML = `<strong>${key.replace('_', ' ').toUpperCase()}</strong>: ${formData[key]}`;
-                        dataList.appendChild(listItem);
-                    }
-                }
-
-                // Append all elements to the result container
-                resultContainer.appendChild(title);
-                resultContainer.appendChild(dataList);
-                
-                // Add a simple button to go back or reload the page
-                const reloadButton = document.createElement('button');
-                reloadButton.className = 'btn btn-primary mt-4';
-                reloadButton.innerText = 'Go Back';
-                reloadButton.onclick = () => window.location.reload();
-                resultContainer.appendChild(reloadButton);
-
-                // Add the container to the body
-                document.body.appendChild(resultContainer);
-            });
-        });
-
-        function togglePassword(id) {
-            const input = document.getElementById(id);
-            input.type = input.type === "password" ? "text" : "password";
-        }
-
-        document.getElementById("id_username").placeholder = 'Student ID **'
-        document.getElementById("id_password1").placeholder = 'Password **'
-        document.getElementById("id_password2").placeholder = 'Confirm Password **'
-        document.getElementsByTagName('label')[0].innerText = 'Student ID'
-        document.getElementsByTagName('label')[1].innerText = 'Password'
-        document.getElementsByTagName('label')[2].innerText = 'Confirm Password'
-    </script>
-    <script src="{% static 'js/main.js' %}"></script>
+<script>
+    function togglePassword(id) {
+  const input = document.getElementById(id);
+  input.type = input.type === "password" ? "text" : "password";
+}
+    document.getElementById("id_username").placeholder = 'Student ID **'
+    document.getElementById("id_password").placeholder = 'Password **'
+    document.getElementsByTagName('label')[0].innerText = 'Student ID'
+    document.getElementsByTagName('label')[1].innerText = 'Password'
+</script>
 </body>
+<script src="{% static 'js/main.js' %}"></script>
 </html>
