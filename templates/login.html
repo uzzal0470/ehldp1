@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-site-verification" content="pYL3FeaSYGOHhoC0M71Llr8GZk8QvWfc9oxMIrd6KEM" />
+    <title>Login - EHLDP</title>
+    <link rel="icon" type="image/svg+xml" href="/media/j.png">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.min.css' %}">
+    <style>
+        input, select, textarea, button {
+            border-radius: 10px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            outline: none !important;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #442e9e;
+            box-shadow: 0 0 5px rgba(68, 46, 158, 0.5);
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        div#form{
+            display: grid;
+        }
+        input{
+            cursor: pointer;
+        }
+        .toggle-password{
+        cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-dark px-4">
+        <div>
+            <a href="{% url 'login' %}" class="btn btn-primary me-2">Login</a>
+            <a href="{% url 'signup' %}" class="btn btn-secondary">Signup</a>
+        </div>
+    </nav>
+
+    <div class="form-container" style="width: 100%;">
+        <h2 class="px-4 text-center form-header text-white font-bold py-2 px-4 rounded font-bold mb-4 uppercase text-black bg-gradient-to-r to-blue-500 from-blue-300  animate-gradient">Login on you EHLDP account</h2>
+            <div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="text-center alert alert-info ">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+                <div class="mb-3" id="form">
+                    <label for="password" class="form-label">Student ID or Whatsapp Number :</label><br>
+                    <input type="text" name="username" id="username" placeholder="Student Id or Whatsapp Number **" style="width: 92%;" required><br>
+                <div class="mb-3" id="form">
+                    <label for="password" class="form-label">Password :</label><br>
+                    <div>
+                    <input type="password" name="password" id="password" placeholder="Password **" style="width: 92%;" required>
+                    <code class="toggle-password" onclick="togglePassword('password')">👁️</code></div><br>
+                    
+                    
+                </div>
+            <center>
+            <button type="submit" class="w-1 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded font-bold mb-4 uppercase text-black bg-gradient-to-r to-blue-500 from-blue-300  animate-gradient">Login</button>
+            </center>
+        </form>
+
+        <p class="mt-1">
+            Forgot your password? <a style="text-decoration: none; -webkit-text-fill-color: blue;" href="{% url 'login' %}">Reset It </a>
+        </p>
+    </div>
+<script>
+    document.getElementById("id_username").placeholder = 'Student ID **'
+    document.getElementById("id_password").placeholder = 'Password **'
+    document.getElementsByTagName('label')[0].innerText = 'Student ID'
+    document.getElementsByTagName('label')[1].innerText = 'Password'
+</script>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

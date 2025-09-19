@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/media/j.png">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+
+    <title>Admin Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        .card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { margin-top: 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 1px; text-align: center; border-bottom: 1px solid #ddd; }
+        a.button { padding: 5px 10px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; margin-right: 5px; }
+        a.button.danger { background-color: #f44336; }
+    </style>
+</head>
+<nav class="navbar navbar-dark bg-dark px-4 fixed-top">
+    <a class="btn btn-outline-light" href="{% url 'home' %}">⬅️ Back </a>
+</nav>
+<body>
+<br><br><br>
+
+<h1>Admin Dashboard</h1>
+<div class="card text-center">
+    <h3>Now Event : {% if event.text == 'none' %} No Event Now {% else %}{{event.text}}{% endif %}</h3>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="event" id="id_event" class="mb-2">
+        <br><button type="submit" class="btn btn-outline-primary">Add</button></form>
+    </div>
+    <div class="card">
+        <h2>Overview</h2>
+        <p><strong>Total Student:</strong> {{ total_users }}</p>
+        <p><strong>Total Active Studen:</strong> {{ active }}</p>
+        <p><strong>Total Withdrawal Requests:</strong> {{ total_withdraws }}</p>
+    </div>
+
+    <div class="card">
+        <h2>Pending User Approvals</h2>
+        {% if pending_users %}
+        <table>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Actions</th>
+            </tr>
+            {% for user in pending_users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.get_full_name }}</td>
+                <td>
+                    <a class="button" href="{% url 'approve_user' user.id %}">Approve</a>
+                    <a class="button danger" href="{% url 'decline_user' user.id %}">Decline</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No users awaiting approval.</p>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <h2>Approved Student</h2>
+        {% if react %}
+        <table>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Actions</th>
+            </tr>
+            {% for user in react %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.get_full_name }}</td>
+                <td>
+                    <a class="button">Approved</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No users was approvet.</p>
+        {% endif %}
+    </div>
+    <div class="card">
+        <h2>Recent Withdrawal Requests</h2>
+        {% if recent_withdraws %}
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+            {% for w in recent_withdraws %}
+            <tr>
+                <td>{{ w.user.username }}</td>
+                <td>{{ w.amount }}</td>
+                <td>{{ w.status }}</td>
+                <td>{{ w.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No recent withdrawal requests.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

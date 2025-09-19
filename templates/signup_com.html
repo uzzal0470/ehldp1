@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<title>Wellcome {{request.user.get_full_name}}</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: opacity 2s ease;
+    opacity: 1;
+  }
+  #typingText {
+    font-size: 1.8em;
+    border-right: 2px solid orange;
+    padding: 10px;
+    min-height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 1.2em;
+    background-color: orange;
+    color: black;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: gold;
+  }
+</style>
+</head>
+<body>
+
+<div id="typingText"></div>
+<button id="nextBtn" style="display:none;">Next</button>
+
+<audio id="typeSound" src="https://www.soundjay.com/mechanical/typewriter-key-1.mp3" preload="auto"></audio>
+
+<script>
+  // Boom animation (simple circle expand + fade)
+  function boomAnimation() {
+    return new Promise(resolve => {
+      const boom = document.createElement('div');
+      boom.style.position = 'fixed';
+      boom.style.top = '50%';
+      boom.style.left = '50%';
+      boom.style.width = '20px';
+      boom.style.height = '20px';
+      boom.style.background = 'orange';
+      boom.style.borderRadius = '50%';
+      boom.style.transform = 'translate(-50%, -50%) scale(1)';
+      boom.style.boxShadow = '0 0 10px 5px yellow';
+      boom.style.zIndex = '1000';
+      boom.style.transition = 'transform 1s ease-out, opacity 1s ease-out';
+      document.body.appendChild(boom);
+
+      setTimeout(() => {
+        boom.style.transform = 'translate(-50%, -50%) scale(50)';
+        boom.style.opacity = '0';
+      }, 50);
+
+      setTimeout(() => {
+        document.body.removeChild(boom);
+        resolve();
+      }, 1050);
+    });
+  }
+
+  const typeSound = document.getElementById('typeSound');
+  const typingText = document.getElementById('typingText');
+  const nextBtn = document.getElementById('nextBtn');
+
+  // Function to type sentence char by char with sound
+  async function typeSentenceChars(sentence) {
+    typingText.textContent = '';  // Clear before typing
+    for (let i = 0; i < sentence.length; i++) {
+      typingText.textContent += sentence.charAt(i);
+      playTypingSound();
+      await wait(100); // wait 100ms between chars
+    }
+  }
+
+  function playTypingSound() {
+    const soundClone = typeSound.cloneNode();
+    soundClone.play();
+  }
+
+  function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  // Sentences to show step by step
+  const steps = [
+    "Wellcome to earning Happy Life Digital Platform.",
+    "Your Name: {{request.user.get_full_name}}",
+    "Your Phone Number: {{request.user.wnum}}",
+    "Your Password: {{request.user.passw}}"
+  ];
+
+  let currentStep = 0;
+
+  async function start() {
+    await boomAnimation();
+    await typeSentenceChars(steps[currentStep]);
+    currentStep++;
+    nextBtn.style.display = 'inline-block';
+  }
+
+  nextBtn.addEventListener('click', async () => {
+    if (currentStep < steps.length) {
+      await typeSentenceChars(steps[currentStep]);
+      currentStep++;
+    } else {
+      // Show thank you, fade out and redirect
+      await typeSentenceChars("Thank you! Form completed.");
+      nextBtn.style.display = 'none';
+
+      // Fade out body
+      document.body.style.opacity = '0';
+
+      // Redirect after fade out (2s)
+      setTimeout(() => {
+        window.location.href = 'https://www.google.com';  // Change this URL as you want
+      }, 2000);
+    }
+  });
+
+  start();
+</script>
+
+</body>
+</html>

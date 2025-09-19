@@ -1,0 +1,61 @@
+<!-- templates/404.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/media/j.png">
+    <title>Page Not Found (404)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            margin: 0px auto;
+            text-align: center;
+            max-width: 500px;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 6rem;
+            margin-bottom: 0;
+            color: #6c757d;
+        }
+        h2 {
+            font-weight: 600;
+            margin: 0.5rem 0 1.5rem;
+        }
+        p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        a {
+            text-decoration: none;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <h2>Oops! Page Not Found.</h2>
+        <p>The page you are looking for might have been removed or is temporarily unavailable. If you type manualy please check speling and try agin .</p>
+        <a href="{% url 'home' %}">← Go Back Home</a>
+    </div>
+</body>
+</html>

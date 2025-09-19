@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style data-emotion="mantine" data-s=""></style>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/media/j.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% if request.user.get_full_name %}{{request.user.get_full_name}} 's {% endif %}Profile</title>
+<style>
+  .Button{
+  background-color:var(bg-gradient-to-r);
+  }
+  span#heroAnimText {
+    position: relative;
+    z-index: 1;
+  }
+
+  span#heroAnimText:after {
+    position: absolute;
+    right: -20px;
+    top: -3px;
+    width: 8px;
+    height: 120%;
+    content: "";
+    background-color: #442e9e;
+    animation: heroTypePipe 0.6s ease-in-out infinite;
+  }
+
+  @keyframes heroTypePipe {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
+<style id="_goober"> @keyframes go2264125279{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go3020080000{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}@keyframes go463499852{from{transform:scale(0) rotate(90deg);opacity:0;}to{transform:scale(1) rotate(90deg);opacity:1;}}@keyframes go1268368563{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}@keyframes go1310225428{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go651618207{0%{height:0;width:0;opacity:0;}40%{height:0;width:6px;opacity:1;}100%{opacity:1;height:10px;}}@keyframes go901347462{from{transform:scale(0.6);opacity:0.4;}to{transform:scale(1);opacity:1;}}.go4109123758{z-index:9999;}.go4109123758 > *{pointer-events:auto;}</style>
+<!-- Bootstrap -->
+<link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+<style>
+    .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body class="bg-light">
+
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-white px-4">
+    <a class="btn btn-outline-primary me-2 mb-2" href="{% url 'home' %}">🏠 Home</a>
+    <div>
+      {% if request.user.active_permision %}
+        <a class="btn btn-outline-primary me-2" href="{% url 'withdraw-request' %}">💸 Withdraw</a>
+      {% endif %}
+        <a class="btn btn-outline-primary me-2" href="{% url 'logout' %}">🚪 Logout</a>
+    </div>
+</nav>
+
+<!-- Profile Section -->
+<div class="container my-5">
+    <div class="text-center mb-4" style="display: block ruby;">
+        <img src="/media/favicon.jpg" alt="Profile Picture" class="profile-img">
+    </div>
+</div>
+
+<div class="card mx-auto shadow" style="max-width: 500px;">
+  <div class="navbar bg-white text-black p-2" style="-webkit-text-fill-color: black;">
+    <div>
+      <a class="btn btn-outline-primary me-2" href="{% url 'ref-his' %}">My Referral</a>
+      <a class="btn btn-outline-primary" href="{% url 'history' %}">History</a>
+    </div>
+
+    <div class="dropdown is-right d-inline-block ms-3">
+      <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="settingsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Setting
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingsDropdown">
+        <li><a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <div style="margin: 1px 20px;">
+    <p><strong>Student ID : </strong><code id="ID" onclick="copyID()">{{user.username}}</code><a id="copiedID" onclick="copyID()"> 📋 Copy</a></p>
+    <p><strong>Full Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+    <p><strong>Your Country : </strong>{{user.country}}</p>
+    <p><strong>Balance:</strong> {{ user.balance }} 💸</p>
+    <p><strong>WhatsApp Number:</strong>{% if user.country == 'india' %} +91{% else %}+88{% endif %}{{ user.whatsapp_number }}</p>
+    {% if user.referred_by %}
+        <p><strong>Referred By:</strong> {{ user.referred_by.username }}</p>
+    {% endif %}
+    <p><strong>Raferal Link : </strong><code id="refCode" onclick="copyRefCode()">http://{{request.get_host}}/signup/?ref={{ user.referral_code}}</code><a id="copiedMsg" onclick="copyRefCode()"> 📋 Copy</a></p>
+  </div>
+</div>
+
+<script>
+  function copyRefCode() {
+    const code = document.getElementById("refCode").innerText;
+    navigator.clipboard.writeText(code).then(function() {
+      document.getElementById("copiedMsg").style.color = "green";
+      document.getElementById("copiedMsg").innerText = " ✔️ Copy Succesfull";
+      setTimeout(() => {
+        document.getElementById("copiedMsg").style.color = "black";
+        document.getElementById("copiedMsg").innerText = " 📋 Copy";
+      }, 2000);
+    });
+  }
+  function copyID() {
+    const code = document.getElementById("ID").innerText;
+    navigator.clipboard.writeText(code).then(function() {
+      document.getElementById("copiedID").style.color = "green";
+      document.getElementById("copiedID").innerText = " ✔️ Copy Succesfull";
+      setTimeout(() => {
+        document.getElementById("copiedID").style.color = "black";
+        document.getElementById("copiedID").innerText = " 📋 Copy";
+      }, 2000);
+    });
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

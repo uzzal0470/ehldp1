@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+        <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"><style data-emotion="mantine" data-s=""></style>
+            <meta charset="UTF-8">
+            <link rel="icon" type="image/svg+xml" href="/media/j.png">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>My Referral History</title>
+            <style>
+            td#pending{
+                border-radius: 5px;
+                background-color: rgb(223, 220, 31);
+                -webkit-text-fill-color: black;
+            }
+            td#rejected{
+                border-radius: 5px;
+                background-color: rgb(253, 106, 106);
+                -webkit-text-fill-color: black;
+            }
+            td#accepted{
+                border-radius: 5px;
+                background-color: rgb(8, 255, 90);
+                -webkit-text-fill-color: black;
+            }
+            span#heroAnimText {
+                position: relative;
+                z-index: 1;
+            }
+
+            span#heroAnimText:after {
+                position: absolute;
+                right: -20px;
+                top: -3px;
+                width: 8px;
+                height: 120%;
+                content: "";
+                background-color: #442e9e;
+                animation: heroTypePipe 0.6s ease-in-out infinite;
+            }
+
+            @keyframes heroTypePipe {
+                50% {
+                opacity: 0;
+                }
+            }
+            </style>
+            <style id="_goober"> @keyframes go2264125279{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go3020080000{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}@keyframes go463499852{from{transform:scale(0) rotate(90deg);opacity:0;}to{transform:scale(1) rotate(90deg);opacity:1;}}@keyframes go1268368563{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}@keyframes go1310225428{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go651618207{0%{height:0;width:0;opacity:0;}40%{height:0;width:6px;opacity:1;}100%{opacity:1;height:10px;}}@keyframes go901347462{from{transform:scale(0.6);opacity:0.4;}to{transform:scale(1);opacity:1;}}.go4109123758{z-index:9999;}.go4109123758 > *{pointer-events:auto;}</style>
+            <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'style.min.css' %}">
+
+            <style>
+                table{
+                    justify-content: center;
+                    display: flex;
+                }
+                td.head{
+                    width: 180px;
+                    height: 30px;
+                    text-align: center;
+                }
+                p#head{
+                    -webkit-text-fill-color: red;
+                    background-color: aliceblue;
+                }
+
+                p{
+                    -webkit-text-fill-color: rgb(0, 0, 0);
+                    text-align: center;
+                }
+                td#body{
+                    border-bottom-width: 1px;
+                    border-bottom-color: black;
+             
+                    border-left-color: black;
+                    border-right-color: black;
+
+                }
+            </style>
+
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-light bg-white px-4">
+    <a class="btn btn-outline-dark" href="{% url 'profile' %}">Back</a>
+</nav>
+<body>
+<!-- All History -->
+<div class="container my-5">
+    <h4 class="text-center px-4 font-bold py-2 px-4 rounded font-bold mb-4 uppercase text-white bg-gradient-to-r to-blue-500 from-blue-300  animate-gradient">Referral History</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <tr>
+                    <th class="text-center">Student Name</th>
+                    <th class="text-center">Time</th>
+                    <th class="text-center">Student ID</th>
+                    <th class="text-center">Student Balance</th>
+            </tr>
+
+                {% for r in all_refer %}
+                    <tr>
+                        <td class="text-center">{{ r.refered_student.get_full_name }}</td>
+                        <td class="text-center">{{ r.time }}</td>
+                        <td class="text-center">{{ r.refered_student.username }}</td>
+                        <td class="text-center">${{ r.refered_student.balance }}</td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="4" class="text-center">No records found.</td></tr>
+                {% endfor %}
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

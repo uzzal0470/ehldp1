@@ -1,0 +1,582 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="pYL3FeaSYGOHhoC0M71Llr8GZk8QvWfc9oxMIrd6KEM" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - EHLDP</title>
+  <link rel="icon" href="/media/favicon.png" type="image/png">
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+  <style>
+    #heroAnimText::after {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: 0;
+      width: 8px;
+      height: 100%;
+      background-color: #442e9e;
+      animation: blink 0.6s ease-in-out infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+<!--On login The User On here-->
+{% if request.user.is_authenticated %}
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style='background-color:#bfbff4;'>
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+      <img src="/media/j.png" width="40" height="40" class="me-2 rounded">
+      <span>DIGITAL PLATFORM</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon color-dark"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ms-auto">
+        {% if user.is_authenticated %}
+          {% if request.user.is_superuser %}
+	  <li class="nav-item">
+            <a class="btn btn-outline-dark me-2 mb-2 mt-2" href="{% url 'admin-profile' %}">User Password Change</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary me-2 mb-2 mt-2" href="{% url 'admin_dashboard' %}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-dark me-2 mb-2 mt-2" href="{% url 'balance-control' %}">Balance Control</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary me-2 mb-2 mt-2" href="{% url 'process-withdraw' %}">Withdraw Control</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="btn btn-outline-dark me-2 mb-2 mt-2" href="{% url 'profile' %}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary me-2 mb-2 mt-2" href="{% url 'logout' %}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  {% if event.text %}
+  {% if not event.text == 'none' %}
+  <marquee direction="left">{{event.text}}</marquee>
+  {% endif %}
+  {% endif %}
+</nav>
+
+{% if request.user.active_permision %}
+<!-- Hero Section -->
+<section class="text-center text-white d-flex align-items-center justify-content-center vh-100" style="background: url('/media/baner.jpg') center/cover no-repeat;">
+  <div class="bg-opacity-50 p-5 rounded">
+    <h1 class="display-4 fw-bold position-relative" id="heroAnimText">
+      <span>Earning </span> Happy Life Digital PLATFORM
+    </h1>
+  </div>
+</section>
+
+<!-- Our Services -->
+<section class="py-5 bg-light text-center">
+  <div class="container">
+    <h2 class="mb-4 text-uppercase fw-bold">Our Services</h2>
+    <p class="mb-5">Earning Happy Life Digital Platform gives you full freedom</p>
+    <div class="row g-4">
+      </div>
+      </div>
+      </section>
+<!--For Experiment My new-->
+
+
+
+<div class="col-12 col-md-5 col-lg-7">
+        <div class="hero-right-side">
+
+                </div>
+                    <div class="hero-btns mb-4 row gy-4">
+                                                <div class=" bg-white text-black col-12 py-2">
+                            <h3 class="text-center">Customer Services</h3>
+
+
+{% for t in tra %}
+
+                                                                                          <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                <div class="col-12">
+                                    <h5 class="my-3 text-center">{{t.role}}</h5>
+                                </div>
+                                <div class="col-6">
+                                    Name: {{t.name}}
+                                </div>
+                                <div class="col-6">
+                                    <a href="https://wa.me/+88{{t.wnum}}" class="btn btn-outline-primary text-black border-white col-12"target="_blank">Whatsapp <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                </div>
+                            </div>                    
+                           
+{% endfor %}                                                       
+
+
+                        </div>
+                              <div class="bg-white text-black p-2 py-4 col-12">
+
+
+                            <h5 class="my-3 text-center">Join Live Classes</h5>
+
+                            
+                                                             
+                                <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                                
+                                <div class="col-6">
+                                            Class Topic: Photo Editing <br>
+                                            Joining Time: 11:00 AM To 12:00 AM
+                                        </div>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                
+                                        <div class="col-6">
+
+                                            <a target="_blank" href="#" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                        </div>
+                                                                            </div>
+                                                                                             
+                                <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                        
+                                                                        
+                
+                                        <div class="col-6">
+                                            Class Topic: Video Editing <br>
+                                            Joining Time: 02:00 PM To 03:00 PM
+                                        </div>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                        
+                                        <div class="col-6">
+
+                                            <a href="#" target="_blank" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                        </div>
+                                                                            </div>
+                                                                                             
+                                <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                        
+                                                                        
+                                                                        
+                        
+                                        <div class="col-6">
+                                            Class Topic: Digital Marketing <br>
+                                            Joining Time: 02:00 PM To 03:00 PM
+                                        </div>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                
+                                        <div class="col-6">
+
+                                            <a href="#" target="_blank" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                        </div>
+                                                                            </div>
+                                                                                             
+                                <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                
+                                        <div class="col-6">
+                                            Class Topic: Al-Quran Hadis &amp; Namaz Shikkha <br>
+                                            Joining Time: 03:00 PM To 04:00 PM
+                                        </div>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                        
+                                        <div class="col-6">
+
+                                            <a href="#" target="_blank" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                        </div>
+                                                                            </div>
+                                                                                             
+                                <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                        
+                                        <div class="col-6">
+                                            Class Topic: Data Entry <br>
+                                            Joining Time: 05:00 PM To 06:00 PM
+                                        </div>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                
+                                        <div class="col-6">
+
+                                            <a href="#" target="_blank" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                        </div>
+                                                                            </div>
+                                                                                             
+                                <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                
+                                        <div class="col-6">
+                                            Class Topic: Product  Buy &amp; Sell <br>
+                                            Joining Time: 06:00 PM To 07:00 PM
+                                        </div>
+
+                                                                        
+                                                                        
+                                                                        
+                        
+                                        <div class="col-6">
+
+                                            <a href="#" target="_blank" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                        </div>
+                                                                            </div>
+                                                                                             
+                                <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                        
+                                        <div class="col-6">
+                                            Class Topic: Graphic Design <br>
+                                            Joining Time: 07:00 PM To 08:00 PM
+                                        </div>
+
+                                                                        
+                                                                        
+                
+                                        <div class="col-6">
+
+                                            <a href="#" target="_blank" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                        </div>
+                                                                            </div>
+                                                                                             
+                                <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                
+  <div class="col-6">
+    Class Topic: Facebook marketing<br>
+    Joining Time: 08:00 PM To 09:00 PM
+  </div>
+
+                                                                                
+  <div class="col-6">
+
+  <a href="#" target="_blank" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        </div>
+      </div>
+                                                            
+                            
+ <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                        
+                                                                        
+                
+                                        <div class="col-6">
+                                            Class Topic: Gmail Marketing <br>
+                                            Joining Time: 04:00 PM To 05:00 PM
+                                        </div>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                        
+                                        <div class="col-6">
+
+                                            <a href="#" target="_blank" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                        </div>
+                                                                            </div>
+
+ <div class="row border border-black p-2 mx-4 my-2 align-items-center">
+                                        
+                                                                        
+                                                                        
+                
+                                        <div class="col-6">
+                                            Class Topic: Island <br>
+                                            Joining Time: 05:00 PM To 05:30 PM
+                                        </div>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                        
+                                        <div class="col-6">
+
+                                            <a href="#" target="_blank" class="btn btn-outline-primary text-black border-white col-12">Join Class <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                                        </div>
+                                                                            </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% else %}
+<section class="text-center text-white d-flex align-items-center justify-content-center vh-100" style="background: url('/media/baner.jpg') center/cover no-repeat;">
+  <div class="bg-dark bg-opacity-50 p-5 rounded">
+    <h1 class="display-4 fw-bold position-relative" id="heroAnimText">
+      <span> You are not active your account !
+    </h1>
+  </div>
+  <div class="bg-opacity-50 p-5 rounded position-relative">To Active Your account <a href="#" class="btn btn-outline-primary text-white border-white col-12"target="_blank">Whatsapp <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
+</section>
+
+<!-- Our Services -->
+<section class="py-5 bg-light text-center">
+  <div class="container">
+    <h2 class="mb-4 text-uppercase fw-bold">Our Services</h2>
+    <p class="mb-5">Earning Happy Life Digital Platform gives you full freedom</p>
+    <div class="row g-4">
+      <!-- Service 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 bg-primary text-white">
+          <div class="card-body">
+            <div class="mb-3">
+              <i class="bi bi-book-fill fs-1"></i>
+            </div>
+            <h5 class="card-title">6+ Courses</h5>
+            <p class="card-text">We have 6+ courses you can learn from us.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Service 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 bg-success text-white">
+          <div class="card-body">
+            <div class="mb-3">
+              <i class="bi bi-person-badge-fill fs-1"></i>
+            </div>
+            <h5 class="card-title">Expert Trainer</h5>
+            <p class="card-text">Expert guidance for mastering your skills.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Service 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 bg-warning text-dark">
+          <div class="card-body">
+            <div class="mb-3">
+              <i class="bi bi-infinity fs-1"></i>
+            </div>
+            <h5 class="card-title">Lifetime Access</h5>
+            <p class="card-text">Enjoy unlimited lifetime access to our courses.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endif %}
+
+
+<!-- Footer -->
+<footer style="background-color: #cca0ca !important;" class="text-dark pt-5 pb-3">
+  <div class="container">
+    <div class="row">
+      <!-- Logo and About -->
+      <div class="col-md-4 mb-3">
+        <a href="{% url 'home' %}" class="d-flex align-items-center mb-2 text-white text-decoration-none">
+          <img src="/media/j.png" alt="Logo" width="50" height="50" class="me-2 rounded">
+          <span class="fs-5" style="color: #a80670 !important;"> Digital Platform</span>
+        </a>
+        <p>Earning Happy Life Digital Platform is a complete online learning system for everyone.</p>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-md-4 mb-3 col-right">
+        <h5>Contact Info</h5>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-geo-alt-fill"></i>Jaldhaka , Nilphamari , Rongpur</li>
+          <li><i class="bi bi-telephone-fill"></i> +8801304904701</li>
+          <li><i class="bi bi-envelope-fill"></i> earninghappylifedigitalplatfor@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center border-top pt-3 mt-3">
+      <p>&copy; 2025 <a style="color: #a80670 !important;" class="text-white text-decoration-none">Earning Happy Life Digital Platform</a>. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+{% else %}
+<!-- Header Navbar (NO COLLAPSE) -->
+<nav class="navbar navbar-light fixed-top" style="background-color: darkturquoise;">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+      <img src="/media/j.png" alt="Logo" width="40" height="40" class="me-2 rounded">
+      <span>DIGITAL PLATFORM</span>
+    </a>
+
+    <div class="d-flex align-items-center">
+    <div>
+        <a class="btn btn-sm btn-secondary me-2" href="{% url 'login' %}">Login</a>
+        <a class="btn btn-sm btn-outline-dark" href="{% url 'signup' %}">Sign Up</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="text-center text-white d-flex align-items-center justify-content-center vh-100" style="background: url('/media/baner.jpg') center/cover no-repeat;">
+  <div class="bg-opacity-50 p-5 rounded">
+    <h1 class="display-4 fw-bold position-relative" id="heroAnimText">
+      <span>Earning </span> Happy Life Digital PLATFORM
+    </h1>
+  </div>
+</section>
+
+<!-- Our Services -->
+<section class="py-5 bg-light text-center">
+  <div class="container">
+    <h2 class="mb-4 text-uppercase fw-bold">Our Services</h2>
+    <p class="mb-5">Earning Happy Life Digital Platform gives you full freedom</p>
+    <div class="row g-4">
+      <!-- Service 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 bg-primary text-white">
+          <div class="card-body">
+            <div class="mb-3">
+              <i class="bi bi-book-fill fs-1"></i>
+            </div>
+            <h5 class="card-title">6+ Courses</h5>
+            <p class="card-text">We have 6+ courses you can learn from us.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Service 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 bg-success text-white">
+          <div class="card-body">
+            <div class="mb-3">
+              <i class="bi bi-person-badge-fill fs-1"></i>
+            </div>
+            <h5 class="card-title">Expert Trainer</h5>
+            <p class="card-text">Expert guidance for mastering your skills.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Service 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 bg-warning text-dark">
+          <div class="card-body">
+            <div class="mb-3">
+              <i class="bi bi-infinity fs-1"></i>
+            </div>
+            <h5 class="card-title">Lifetime Access</h5>
+            <p class="card-text">Enjoy unlimited lifetime access to our courses.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background-color: #cca0ca !important;" class="text-white pt-5 pb-3">
+  <div class="container">
+    <div class="row">
+      <!-- Logo and About -->
+      <div class="col-md-4 mb-3">
+        <a href="{% url 'home' %}" class="d-flex align-items-center mb-2 text-white text-decoration-none">
+          <img src="/media/j.png" alt="Logo" width="50" height="50" class="me-2 rounded">
+          <span class="fs-5" style="color: #a80670 !important;"> Digital Platform</span>
+        </a>
+        <p>Earning Happy Life Digital Platform is a complete online learning system for everyone.</p>
+      </div>
+      <!-- Contact Info -->
+      <div class="col-md-4 mb-3">
+        <h5>Contact Info</h5>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-geo-alt-fill"></i>Jaldhaka City , Nilphamari , Rongpur , Bangladesh</li>
+          <li><i class="bi bi-phone-fill"></i> +8801304904701</li>
+          <li><i class="bi bi-envelope-fill"></i> earninghappylifedigitalplatfor@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center border-top pt-3 mt-3">
+      <p>&copy; 2025 <a class="text-decoration-none" style="color: #a80670 !important;">Earning Happy Life Digital Platform</a>. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+{% endif %}
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</body>
+<script>
+// Simple dropdown toggle
+document.getElementById('profileDropdownBtn').addEventListener('click', function() {
+    var menu = document.getElementById('profileDropdownMenu');
+    menu.classList.toggle('hidden');
+});
+</script>
+</html>

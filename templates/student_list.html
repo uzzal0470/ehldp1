@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+        <head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style data-emotion="mantine" data-s=""></style>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/media/favicon.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Balance On Student Account</title>
+    <style>
+      span#heroAnimText {
+        position: relative;
+        z-index: 1;
+      }
+
+      span#heroAnimText:after {
+        position: absolute;
+        right: -20px;
+        top: -3px;
+        width: 8px;
+        height: 120%;
+        content: "";
+        background-color: #442e9e;
+        animation: heroTypePipe 0.6s ease-in-out infinite;
+      }
+
+      @keyframes heroTypePipe {
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
+    <script async="" src="BDLearningPoint_files/googlesyndication_adsbygoogle.js" crossorigin="anonymous"></script>
+    <script type="module" crossorigin="" src="{% static 'js/index.js' %}"></script>
+    <style id="_goober"> @keyframes go2264125279{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go3020080000{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}@keyframes go463499852{from{transform:scale(0) rotate(90deg);opacity:0;}to{transform:scale(1) rotate(90deg);opacity:1;}}@keyframes go1268368563{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}@keyframes go1310225428{from{transform:scale(0) rotate(45deg);opacity:0;}to{transform:scale(1) rotate(45deg);opacity:1;}}@keyframes go651618207{0%{height:0;width:0;opacity:0;}40%{height:0;width:6px;opacity:1;}100%{opacity:1;height:10px;}}@keyframes go901347462{from{transform:scale(0.6);opacity:0.4;}to{transform:scale(1);opacity:1;}}.go4109123758{z-index:9999;}.go4109123758 > *{pointer-events:auto;}</style>
+    <link rel="stylesheet" href="{% static 'style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+        <style>
+            #se{
+                background-color: white;
+            }
+        </style>
+        <link rel="stylesheet" href="{% static 'style.min.css' %}">
+    </head>
+{% if user.is_superuser %}
+    <header class="bg-black fixed top-0 py-4 w-full z-50">
+        <center>
+            <form method="get" style="align-content: center;width: 100%;">
+                <input type="text" name="username" placeholder="Enter Student id" required>
+                <button type="submit" id="se">Search</button>
+            </form>
+        </center>
+    </header>
+    <center>
+    <body><br><br><br><br>
+        {% if error %}
+        <p style="-webkit-text-fill-color: red;font-size: x-large;">{{error}}</p>
+        {% endif %}
+        {% if student.username %}
+        <title>Add Balance On {{student.get_full_name}}'s Account</title>
+            <h1>Student ID : {{student.username}}</h1>
+            <h1>Student current Balance : {{student.balance}}</h1>
+            <form method="get" style="display: table-caption;">
+              {{form.as_p}}
+              <br>
+              <button type="submit" class="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white font-bold py-2 px-4 rounded">Add</button>
+            </form>
+        {% else %}
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 uppercase text-black bg-gradient-to-r to-blue-500 from-blue-300 bg-clip-text text-transparent animate-gradient">Welcome To User Balance Control Panel !</h2>
+        <p class="md:text-6xl lg:text-7xl font-bold mb-4 text-black bg-gradient-to-r to-blue-500 from-blue-300 bg-clip-text text-transparent animate-gradient">Enter the Student id on Top search Field and prees Search</p>
+        {% endif %}
+    </body>
+    </center>
+  {%else%}
+<h2 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 uppercase text-black bg-gradient-to-r to-blue-500 from-blue-300 bg-clip-text text-transparent animate-gradient" style="margin: 100px auto;text-align: center;">You can't view this page !</h2>
+{% endif %}
+</html>

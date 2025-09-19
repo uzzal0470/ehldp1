@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Withdraw | {{ request.user.get_full_name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" type="image/svg+xml" href="/media/j.png">
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    
+    <style>
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<nav class="navbar navbar-dark bg-dark px-4">
+    <a class="btn btn-outline-light" href="{% url 'withdraw-request' %}">⬅️ Back</a>
+</nav>
+<!-- Withdraw History -->
+<div class="container my-5">
+    <h4 class="text-center mb-4">📜 Withdraw History</h4>
+
+    {% if history %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Bank</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for h in history %}
+                <tr>
+                    <td>{{ h.created_at|date:"Y-m-d H:i" }}</td>
+                    <td>
+                        {% if h.status == "pending" %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        {% elif h.status == "accepted" %}
+                            <span class="badge bg-success">Accepted</span>
+                        {% else %}
+                            <span class="badge bg-danger">Rejected</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ h.bank }}</td>
+                    <td>{{ h.amount }}৳</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-center text-muted">No withdraw history found.</p>
+    {% endif %}
+</div>
