@@ -53,8 +53,12 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.get_full_name }}</td>
                 <td>
+                    <tr>
                     <a class="button" href="{% url 'approve_user' user.id %}">Approve</a>
+                    </tr>
+                    <tr>
                     <a class="button danger" href="{% url 'decline_user' user.id %}">Decline</a>
+                        </tr>
                 </td>
             </tr>
             {% endfor %}
