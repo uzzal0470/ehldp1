@@ -14,9 +14,9 @@ from pathlib import Path
 import os
 import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(default='postgresql://postgres.bliayxbtoqrrmadbebud:LKIFLNjRlysBggus@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres')
-}
+3DATABASES = {
+#    'default': dj_database_url.config(default='postgresql://postgres.bliayxbtoqrrmadbebud:LKIFLNjRlysBggus@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres')
+#}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,6 +62,19 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'EHLDP.urls'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.bliayxbtoqrrmadbebud',
+        'PASSWORD': 'LKIFLNjRlysBggus',
+        'HOST': 'aws-1-ap-southeast-1.pooler.supabase.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',  # Supabase requires SSL
+        },
+    }
+}
 
 TEMPLATES = [
     {
