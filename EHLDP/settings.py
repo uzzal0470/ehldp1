@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 
-3DATABASES = {
+#DATABASES = {
 #    'default': dj_database_url.config(default='postgresql://postgres.bliayxbtoqrrmadbebud:LKIFLNjRlysBggus@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres')
 #}
 
