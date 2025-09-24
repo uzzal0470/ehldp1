@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>সতর্কবার্তা</title>
+
+  <!-- Paper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/papercss@1.8.3/dist/paper.min.css">
+
+  <!-- Google Font (Bengali) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Sans Display", sans-serif;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #111; /* শুধুই কালো ব্যাকগ্রাউন্ড */
+    }
+
+    .card-wrap {
+      z-index: 2;
+      width: min(900px, 92%);
+      padding: 2rem;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.7);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .typing-box {
+      background: rgba(255,255,255,0.05);
+      padding: 18px;
+      border-radius: 8px;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      min-height: 4.5rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: "Noto Sans Display", sans-serif;
+      color: #fff;
+    }
+
+    .typing-box .caret {
+      display: inline-block;
+      width: 3px;
+      height: 1.2em;
+      background: #ff4d4d;
+      margin-left: 4px;
+      vertical-align: bottom;
+      animation: blink 700ms steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .paper-btn.important {
+      background: #25D366; /* WhatsApp Green */
+      color: #fff;
+      border: none;
+      font-weight: bold;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+  </style>
+</head>
+<body>
+  <main class="card-wrap paper">
+    <h1>সতর্কবার্তা</h1>
+    <div class="typing-box" id="typingBox"></div>
+
+    <div style="margin-top:16px; display:flex; gap:8px; justify-content:flex-end;">
+      <button class="paper-btn" onclick="location.reload()">পুনরায় শুরু</button>
+      <!-- WhatsApp link button -->
+      <a href="https://wa.me/+8801614676549" target="_blank" class="paper-btn important">
+        WhatsApp এ যোগাযোগ করুন
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const text = "টাকা না দিলে Website চালু করা হবে না। ভাই, আমি অনেক অপেক্ষা করেছি, তোমাদের অনেক সমস্যা বুঝেছি; তোমরা আমার সমস্যা বোঝো নি, তাই আমি Website বন্ধ করে দিয়েছি। এখন টাকা দিলে Website চালু করে দেওয়া হবে।";
+    const box = document.getElementById('typingBox');
+
+    const typeSpeed = 60;
+    let idx = 0, showing = '';
+
+    function typeOnce() {
+      if (idx < text.length) {
+        showing += text.charAt(idx);
+        idx++;
+        renderWithCaret(showing);
+        let delay = typeSpeed;
+        const ch = text.charAt(idx-1);
+        if (ch === ',' || ch === '।') delay = typeSpeed * 5;
+        setTimeout(typeOnce, delay);
+      } else {
+        renderWithCaret(showing);
+        setTimeout(() => {
+          box.innerHTML = escapeHtml(showing);
+        }, 400);
+      }
+    }
+
+    function renderWithCaret(str) {
+      box.innerHTML = escapeHtml(str) + '<span class="caret"></span>';
+    }
+
+    function escapeHtml(unsafe) {
+      return unsafe
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    window.onload = () => setTimeout(typeOnce, 400);
+  </script>
+</body>
+</html>
