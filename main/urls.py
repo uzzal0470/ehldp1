@@ -15,4 +15,4 @@ urlpatterns = [
     path('password-change' , views.Password_Change.as_view() , name='change_password')
 ]
 '''
-urlpatterns = []
+urlpatterns = [path('' , views.home , name='home') ,]
