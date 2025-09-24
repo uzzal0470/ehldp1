@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import *
-
+'''
 urlpatterns = [
     path("withdraw-requests/", process_withdraw_requests, name="process-withdraw"),
     path("controller/", controller_page, name="balance-control"),
@@ -10,3 +10,5 @@ urlpatterns = [
     path('profile/' , admin_profile , name='admin-profile')
 
 ]
+'''
+urlpatterns = []
