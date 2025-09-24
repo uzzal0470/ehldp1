@@ -70,7 +70,7 @@ def home(request):
     user = get_user(request)
     tra = T.objects.all()
     event = Event.objects.get(id=1)
-    return render(request , 'home.html', {"user":user , 'event':event , 'tra':tra})
+    return render(request , 'home1.html', {"user":user , 'event':event , 'tra':tra})
 
 def signup_view(request):
     if get_user(request).is_authenticated:
