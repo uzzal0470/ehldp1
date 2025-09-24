@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+'''
 urlpatterns = [
     path('' , views.home , name='home') ,
     path('signup/' , views.signup_view , name="signup"),
@@ -14,3 +14,5 @@ urlpatterns = [
     path('profile/refer_history/' , views.refer_history , name='ref-his'),
     path('password-change' , views.Password_Change.as_view() , name='change_password')
 ]
+'''
+urlpatterns = []
